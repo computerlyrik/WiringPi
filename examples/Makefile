@@ -57,6 +57,11 @@ test2:	test2.o
 	@echo [link]
 	@$(CC) -o $@ test2.o $(LDFLAGS) $(LDLIBS)
 
+test4:	test4.o
+	@echo [link]
+	$(CC) -o $@ test4.o $(LDFLAGS) $(LIBS)
+
+
 speed:	speed.o
 	@echo [link]
 	@$(CC) -o $@ speed.o $(LDFLAGS) $(LDLIBS)
