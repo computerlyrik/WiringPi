@@ -163,7 +163,7 @@ unsigned isOdd(unsigned char x)
       return ((unsigned)(x & 1));
 }
 
-int sendByte(int fh, unsigned char byte, unsigned int parityBit) {
+int serialPut9char(int fh, unsigned char byte, unsigned int parityBit) {
         struct termios options;
         tcgetattr(fh, &options);
 
