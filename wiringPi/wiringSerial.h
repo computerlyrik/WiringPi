@@ -28,6 +28,7 @@ extern int   serialOpen      (char *device, int baud) ;
 extern void  serialClose     (int fd) ;
 extern void  serialFlush     (int fd) ;
 extern void  serialPutchar   (int fd, unsigned char c) ;
+extern void  serialPut9char   (int fd, unsigned char c, int parity) ;
 extern void  serialPuts      (int fd, char *s) ;
 extern void  serialPrintf    (int fd, char *message, ...) ;
 extern int   serialDataAvail (int fd) ;
