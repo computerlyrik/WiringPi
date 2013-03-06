@@ -163,18 +163,18 @@ unsigned isOdd(unsigned char x)
       return ((unsigned)(x & 1));
 }
 
-int serialPut9char(int fh, unsigned char byte, unsigned int parityBit) {
+int serialPut9char(int fh, unsigned char byte, int parityBit) {
         struct termios options;
         tcgetattr(fh, &options);
 
         /* precompute parity and set paritymode so that the paritybit will be parityBit */
         if(isOdd(byte) != parityBit) {
                 options.c_cflag |= PARODD;
-        printf( "8o1\n");
+//        printf( "8o1\n");
         }
         else {
                 options.c_cflag &= ~PARODD;
-        printf ("8e1\n");
+//        printf ("8e1\n");
         }
         tcsetattr(fh, TCSADRAIN, &options);
         return write(fh,&byte,1);
