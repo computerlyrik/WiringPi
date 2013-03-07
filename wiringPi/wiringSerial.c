@@ -92,6 +92,10 @@ int serialOpen (char *device, int baud)
     options.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG) ;
     options.c_oflag &= ~OPOST ;
 
+//  options.c_iflag |= INPCK;
+//  options.c_iflag |= PARMRK;
+//  options.c_iflag &= ~IGNPAR;
+ 
     options.c_cc [VMIN]  =   0 ;
     options.c_cc [VTIME] = 100 ;	// Ten seconds (100 deciseconds)
 
@@ -115,7 +119,7 @@ void serialParity(int fd, int parity) { //0=even, 1=odd
   options.c_cflag |= PARENB ;  // Enable Parity - even by default
   if(parity)  options.c_cflag |= PARODD;
   else options.c_cflag &= ~PARODD;
-  tcsetattr (fd, TCSANOW, &options) ;
+ tcsetattr (fd, TCSAFLUSH, &options) ;
   usleep (100) ;	// .1mS
 }
 
@@ -241,6 +245,7 @@ int serialGetchar (int fd)
 
   if (read (fd, &x, 1) != 1)
     return -1 ;
+//  printf( "%d \n",x);
 
   return ((int)x) & 0xFF ;
 }
